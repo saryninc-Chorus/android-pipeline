@@ -10,9 +10,13 @@ trigger:
       - main
 
 pool:
-  name: 'Ase'
+  vmImage: 'ubuntu-latest'
 
 steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '9.0.x'
   inputs:
     version: '17'
 
