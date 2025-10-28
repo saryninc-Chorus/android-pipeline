@@ -4,7 +4,6 @@ variables:
     include:
       - main
 
-  vmImage: 'windows-latest' # or Ubuntu-latest
 
 trigger:
   branches:
