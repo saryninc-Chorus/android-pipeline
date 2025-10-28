@@ -12,7 +12,7 @@ trigger:
       - main
 
 pool:
-  name: 'Ase'
+  name: 'AseEj'
 
 steps:
   - task: UseDotNet@2
