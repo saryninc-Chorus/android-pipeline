@@ -7,11 +7,20 @@ pool:
   vmImage: 'windows-latest' # or Ubuntu-latest
 
 steps:
-- task: UseJava@1
   inputs:
     version: '17'
 
-- script: |
     echo "Android Assembly on Azure Storm-arm"
     ./gradlew assembleRelease
+
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Yo Android SDK installation"
+      echo y | sdkmanager --install 'platforms;android-30'
+      echo y | sdkmanager --install 'build-tools;30.0.3'
+  
+    - script: |
+        echo "Set Android SDK Path"
+        echo "ANDROID_SDK_ROOT=$(ANDROID_HOME)" >> $GITHUB_ENV
 
