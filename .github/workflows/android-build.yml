@@ -47,3 +47,7 @@ jobs:
     - name: Install APK on emulator
       run: |
         adb install app-release.apk
+
+    - name: Show AndroidRuntime error logs
+      run: |
+        adb logcat -s AndroidRuntime:E
