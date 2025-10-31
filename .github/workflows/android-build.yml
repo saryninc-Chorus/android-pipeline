@@ -24,7 +24,7 @@ jobs:
           export PATH=$PATH:$HOME/android-sdk/cmdline-tools/cmdline-tools/bin
           yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
           yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "platforms;android-30" "build-tools;30.0.3"
-    - name: Build Android
+    - name: Build Android APK
       run: |
         ./gradlew assembleRelease
 
