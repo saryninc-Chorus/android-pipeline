@@ -126,18 +126,6 @@ jobs:
         with:
           name: projection-video
           path: projection.mp4
-                run: |
-                  adb install app-release.apk
-              - name: Run Instrumentation Tests
-                run: |
-                  adb shell am instrument -w com.your.package.name.test/androidx.test.runner.AndroidJUnitRunner
-              - name: Record emulator screen (projection)
-                run: |
-                  adb shell screenrecord --time-limit 60 /sdcard/projection.mp4
-                  adb pull /sdcard/projection.mp4 .
-              - name: Upload screenrecord artifact
-                uses: actions/upload-artifact@v3
-                with:
                   name: projection-video
                   path: projection.mp4
               - name: Install and Run Projection Test
