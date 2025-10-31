@@ -1,3 +1,7 @@
+      - name: Run AI Code Healing
+        run: |
+          pip install sonarcloud
+          sonarcloud execute --key=YOUR_PROJECT_KEY
 name: Android Build
 on:
   push:
@@ -7,6 +11,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Build Android
+        run: ./gradlew assembleRelease
+      - name: Check Build Stability
+        run: |
+          buildtools check --log | grep -i "error"
+          if [ $? -eq 0 ]; then
+            echo "Build invalidating… Rollback initiated" && exit 1
+          fi
       - uses: actions/checkout@v2
       - name: Set up JDK 17
         uses: actions/setup-java@v1
