@@ -46,4 +46,4 @@ jobs:
           
     - name: Check for Code Smells
       run: |
-        echo "AI analysis complete. Visit https://sonarcloud.io/projects to see full report.”
+        echo "AI analysis complete. Visit https://sonarcloud.io/projects to see full report."
