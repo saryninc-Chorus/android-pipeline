@@ -126,18 +126,6 @@ jobs:
         with:
           name: projection-video
           path: projection.mp4
-                  sudo apt-get install -y wget unzip
-                  wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip -O platform-tools.zip
-                  unzip -q platform-tools.zip -d $HOME/platform-tools
-                  export PATH=$PATH:$HOME/platform-tools/platform-tools
-              - name: Create and start emulator
-                run: |
-                  echo "y" | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
-                  $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-                  $HOME/android-sdk/emulator/emulator -avd test -no-window -no-audio -no-boot-anim &
-                  adb wait-for-device
-                  adb shell 'while [[ $(getprop sys.boot_completed) != "1" ]]; do sleep 1; done;'
-              - name: Install APK on emulator
                 run: |
                   adb install app-release.apk
               - name: Run Instrumentation Tests
