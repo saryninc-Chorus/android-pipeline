@@ -1,3 +1,8 @@
+# Troubleshooting SonarCloud Integration
+# - Could not authenticate: Ensure SONAR_TOKEN is set as a GitHub secret
+# - Invalid project key: Check your key in SonarCloud project settings
+# - No code analysis found: Add 'export SONAR_SCANNER_DEBUG=true' to debug
+# - Pipeline stuck: Add 'timeout-minutes: 5' to the job
 name: AI Code Sentinel
 
 on: [push]
@@ -5,6 +10,7 @@ on: [push]
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -27,6 +33,7 @@ jobs:
         SONAR_PROJECT_NAME: "your_project_name"
       run: |
         export SONAR_SCANNER_HOME=$(pwd)/sonar-scanner-4.7.0.2747-linux
+        export SONAR_SCANNER_DEBUG=true
         $SONAR_SCANNER_HOME/bin/sonar-scanner \
           -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
           -Dsonar.projectName=${SONAR_PROJECT_NAME} \
