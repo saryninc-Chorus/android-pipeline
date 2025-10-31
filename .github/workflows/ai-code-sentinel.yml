@@ -3,10 +3,9 @@
 # - Invalid project key: Check your key in SonarCloud project settings
 # - No code analysis found: Add 'export SONAR_SCANNER_DEBUG=true' to debug
 # - Pipeline stuck: Add 'timeout-minutes: 5' to the job
-name: AI Code Sentinel
 
-on:
-  push:
+name: AI Code Sentinel
+on: push
 
 jobs:
   analyze:
