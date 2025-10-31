@@ -1,0 +1,39 @@
+# Ignore system and user folders
+AppData/
+Local Settings/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+Videos/
+Saved Games/
+Searches/
+Contacts/
+*.log
+*.tmp
+node_modules/
+.vscode/
+.gitconfig
+*.lnk
+*.ini
+*.pdf
+*.dat
+*.repl_history
+
+# Ignore build and IDE files
+*.class
+*.jar
+*.apk
+*.iml
+.idea/
+*.DS_Store
+*.swp
+*.swo
+*.pyc
+__pycache__/
+
+# Ignore OneDrive system files
+OneDrive/desktop.ini
+OneDrive/.849C9593-D756-4E56-8D6E-42412F2A707B
