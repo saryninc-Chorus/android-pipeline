@@ -1,7 +1,3 @@
-      - name: Run AI Code Healing
-        run: |
-          pip install sonarcloud
-          sonarcloud execute --key=YOUR_PROJECT_KEY
 name: Android Build
 on:
   push:
@@ -11,6 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Run AI Code Healing
+        run: |
+          pip install sonarcloud
+          sonarcloud execute --key=YOUR_PROJECT_KEY
       - name: Build Android
         run: ./gradlew assembleRelease
       - name: Check Build Stability
