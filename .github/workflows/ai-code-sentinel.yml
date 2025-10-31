@@ -1,0 +1,42 @@
+name: AI Code Sentinel
+
+on: [push]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set Up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: '17'
+
+    - name: Install SonarCloud CLI
+      run: |
+        curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -o sonar-scanner-cli.zip
+        unzip sonar-scanner-cli.zip
+
+    - name: Run AI Analysis (SonarCloud)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_PROJECT_KEY: "your_project_key"
+        SONAR_PROJECT_NAME: "your_project_name"
+      run: |
+        export SONAR_SCANNER_HOME=$(pwd)/sonar-scanner-4.7.0.2747-linux
+        $SONAR_SCANNER_HOME/bin/sonar-scanner \
+          -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+          -Dsonar.projectName=${SONAR_PROJECT_NAME} \
+          -Dsonar.login=${SONAR_TOKEN} \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.java.binaries=target/classes \
+          -Dsonar.github.repository=${{ github.repository }} \
+          -Dsonar.github.pullRequest=${{ github.event.pull_request.number }}
+          
+    - name: Check for Code Smells
+      run: |
+        echo "AI analysis complete. Visit https://sonarcloud.io/projects to see full report.”
