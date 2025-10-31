@@ -1,3 +1,6 @@
+    - name: Show DisplayManager projection error logs
+      run: |
+        adb logcat -s DisplayManager:E | grep -i "projection"
 name: Android Build
 
 on: [push]
