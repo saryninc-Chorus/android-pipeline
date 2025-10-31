@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.22.1)
+
+option(ENABLE_EXTERNAL_DISPLAY "Enable external display features" ON)
+
+add_library(external_projections SHARED
+    projection/native/src/android.cpp)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DEXTERNAL_DISPLAY=ON")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEXTERNAL_DISPLAY=ON")
+
+target_link_libraries(external_projections
+    android
+    log)
