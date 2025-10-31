@@ -11,11 +11,19 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: '17'
+      - name: Install required packages
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget unzip
     - name: Install Android SDK
       run: |
         echo "Installing Android SDK"
-        yes | sdkmanager --install 'platforms;android-30'
-        yes | sdkmanager --install 'build-tools;30.0.3'
+          wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdline-tools.zip
+          mkdir -p $HOME/android-sdk/cmdline-tools
+          unzip -q cmdline-tools.zip -d $HOME/android-sdk/cmdline-tools
+          export ANDROID_SDK_ROOT=$HOME/android-sdk
+          export PATH=$PATH:$HOME/android-sdk/cmdline-tools/cmdline-tools/bin
+          yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
+          yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "platforms;android-30" "build-tools;30.0.3"
     - name: Build Android
       run: |
         ./gradlew assembleRelease
