@@ -48,6 +48,10 @@ jobs:
       run: |
         adb install app-release.apk
 
+    - name: Run Instrumentation Tests
+      run: |
+        adb shell am instrument -w com.your.package.name.test/androidx.test.runner.AndroidJUnitRunner
+
     - name: Show AndroidRuntime error logs
       run: |
         adb logcat -s AndroidRuntime:E
