@@ -3,6 +3,11 @@
         with:
           name: projection-logs
           path: projection_logs.txt
+      - name: Upload projection logs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: projection-logs
+          path: projection_logs.txt
       - name: Install and Run Projection Test
         run: |
           adb install app-release.apk
