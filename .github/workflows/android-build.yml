@@ -1,3 +1,13 @@
+    - name: Record emulator screen (projection)
+      run: |
+        adb shell screenrecord --time-limit 60 /sdcard/projection.mp4
+        adb pull /sdcard/projection.mp4 .
+
+    - name: Upload screenrecord artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: projection-video
+        path: projection.mp4
     - name: Show DisplayManager projection error logs
       run: |
         adb logcat -s DisplayManager:E | grep -i "projection"
