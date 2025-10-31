@@ -123,41 +123,9 @@ jobs:
           adb pull /sdcard/projection.mp4 .
       - name: Upload screenrecord artifact
         uses: actions/upload-artifact@v3
+        with:
+          name: projection-video
           path: projection.mp4
-
-        name: Android Build
-        on:
-          push:
-            branches:
-              - master
-        jobs:
-          build:
-            runs-on: ubuntu-latest
-            steps:
-              - uses: actions/checkout@v2
-              - name: Set up JDK 17
-                uses: actions/setup-java@v1
-                with:
-                  java-version: '17'
-              - name: Install required packages
-                run: |
-                  sudo apt-get update && sudo apt-get install -y wget unzip
-              - name: Install Android SDK
-                run: |
-                  echo "Installing Android SDK"
-                  wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdline-tools.zip
-                  mkdir -p $HOME/android-sdk/cmdline-tools
-                  unzip -q cmdline-tools.zip -d $HOME/android-sdk/cmdline-tools
-                  export ANDROID_SDK_ROOT=$HOME/android-sdk
-                  export PATH=$PATH:$HOME/android-sdk/cmdline-tools/cmdline-tools/bin
-                  yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
-                  yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "platforms;android-30" "build-tools;30.0.3"
-              - name: Build Android APK
-                run: |
-                  ./gradlew assembleRelease
-              - name: Install Android Platform Tools (adb)
-                run: |
-                  sudo apt-get update
                   sudo apt-get install -y wget unzip
                   wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip -O platform-tools.zip
                   unzip -q platform-tools.zip -d $HOME/platform-tools
