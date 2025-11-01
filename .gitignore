@@ -46,3 +46,6 @@ OneDrive/.849C9593-D756-4E56-8D6E-42412F2A707B
 
 # Ignore AI training data exports
 training_data/
+
+# Ignore generated reports
+circuit_inference_results.json
