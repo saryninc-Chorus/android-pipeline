@@ -1,0 +1,22 @@
+Auto Screen Fullscreen Patent
+
+This document describes an invention related to automatic screen fullscreen functionality in Android applications.
+
+Summary:
+A system and method for automatically transitioning an Android application display to fullscreen mode based on user context, device orientation, or application state.
+
+Key Features:
+- Automatic detection of optimal fullscreen conditions
+- Seamless transition between windowed and fullscreen modes
+- Context-aware display management
+- User preference integration
+- Compatible with Android display APIs
+
+Technical Implementation:
+The system utilizes Android's WindowManager and View system flags to dynamically adjust the display mode based on predefined triggers and user preferences.
+
+Applications:
+- Media playback applications
+- Gaming applications
+- Presentation software
+- Immersive content viewers
