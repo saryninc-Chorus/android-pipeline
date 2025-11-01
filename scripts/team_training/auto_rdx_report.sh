@@ -133,7 +133,8 @@ fi
 # Check test coverage
 if [ -f "circuit_inference_results.json" ]; then
     COVERAGE=$(grep -o '"coverage_ratio": [0-9.]*' circuit_inference_results.json | grep -o '[0-9.]*' | head -1 || echo "0")
-    COVERAGE_NUM=$(echo "$COVERAGE * 100" | bc -l 2>/dev/null | cut -d. -f1 || echo "0")
+    # Use awk for better portability instead of bc
+    COVERAGE_NUM=$(awk "BEGIN {printf \"%.0f\", $COVERAGE * 100}" 2>/dev/null || echo "0")
     
     if [ "$COVERAGE_NUM" -lt 10 ]; then
         echo "- 🔴 Increase test coverage (current: ${COVERAGE_NUM}%)" >> "$REPORT_FILE"

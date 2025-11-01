@@ -51,7 +51,12 @@ def infer_test_circuits():
     print(f"🧪 Found {len(test_files)} test files")
     
     # Calculate coverage ratio
-    coverage_ratio = len(test_files) / len(source_files) if source_files else 0
+    if not source_files and not test_files:
+        coverage_ratio = 0
+    elif not source_files:
+        coverage_ratio = 0  # No source files means no meaningful coverage
+    else:
+        coverage_ratio = len(test_files) / len(source_files)
     
     circuits = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
