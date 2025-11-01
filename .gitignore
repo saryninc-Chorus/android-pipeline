@@ -37,3 +37,9 @@ __pycache__/
 # Ignore OneDrive system files
 OneDrive/desktop.ini
 OneDrive/.849C9593-D756-4E56-8D6E-42412F2A707B
+
+# Ignore Android sensitive files and secrets
+/android/app/
+**/gradle.properties
+**/secrets/
+**/.gitignore
